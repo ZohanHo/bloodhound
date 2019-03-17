@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+
+</head>
+<body>
+
+
+<p class="test" style="">Моя форма</p>
+
+<div>
+    <form id="form_popup" action="" method="post">{% csrf_token %}
+
+        {{ form.as_p }}
+
+
+        <button class="btn-warning buton_popup" form="form_popup">Отправить</button>
+    </form>
+</div>
+
+
+
+
+</body>
+</html>
