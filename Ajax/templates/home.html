@@ -14,6 +14,8 @@
     {% endfor %}
 </div>
 
+
+
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -23,6 +25,8 @@
 
             $.get("/ajax/", function (data) {
 
+
+                 $("div").html( data ); // вставляем в элемент <div> данные, полученные от сервера
             });
 
         });

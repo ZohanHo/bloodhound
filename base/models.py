@@ -8,7 +8,7 @@ class Contact(models.Model):
     date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return "{}".format(self.name)
+        return "Имя: {}, Телефон:{}".format(self.name, self.phone)
 
     class Meta:
         verbose_name = "Контакт"

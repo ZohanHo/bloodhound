@@ -19,6 +19,6 @@ from base import urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/base', include("base.urls")),
+    path('base/', include("base.urls")),
     path('', include("Ajax.urls")),
 ]
