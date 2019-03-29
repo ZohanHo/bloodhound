@@ -3,36 +3,138 @@
 <head>
     <title></title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
 
-<a href="">test</a>
+<form id="form" action="" method="get">{% csrf_token %}
+    <input id="input" type="text" name="search" title="search">
+    <button id="button" class="btn btn-warning">Search</button>
+</form>
 
-<div>
+<a class="" href="" >test</a>
+<br>
+
+<div class="hidden">
     {% for foo in query %}
-        <p>{{ foo.date }}</p>
+        <p class="query_p" data-date="{{ foo.name }}">{{ foo.name }}</p>
     {% endfor %}
 </div>
 
+<div class="hidden">
+    {% for foo in status %}
+        <p class="">{{ foo.name }}-{{ foo.phone }}</p>
+    {% endfor %}
+</div>
+
+<div class="user-container col-md-3" id="div"></div>
 
 
-<script type="text/javascript">
+<script>
+
     $(document).ready(function () {
+    $('#button').click(function (event) {
+        event.preventDefault();
+        $.ajax({
+            type: 'GET',
+            url: '/search/',
 
+        //data: Данные, которые будут отправлены на сервер(считать что то со страницы, отправить во views)
+        // Если они заданы не строчным значением, то будут предварительно преобразован в строку.
+        // Избежать этого преобразования можно изменив параметр processData(его описание можно найти ниже).
+        //В случае запроса методом GET, строка с данными добавляется в конец url.
+        // Если данные задаются с помощью объекта, то он должен соответствовать формату:
+        // {fName1:value1, fName2:value2, ...}.
 
+            data: {value_input: $('#input').val()},
+            // во views.py через q = request.GET.get('qvr', None) - можем его считать (строка)
+
+            //Ф-ция при успешном ajax
+            success: onAjaxSuccess});
+
+        // data в ф-ции это то что возврвщает ф-ция views которая отрабатывает url с ajax
+        function onAjaxSuccess(data) {
+            // строка - {"result": [["Zohan", "0665502911"]], "query": "Zohan"}
+
+            var results = JSON.parse(data);
+            //Метод JSON.parse() разбирает строку JSON, возможно с преобразованием получаемого
+            // в процессе разбора значения, Возвращает объект Object, соответствующий переданной строке JSON
+            //(index):66
+            //{result: Array(1), value_input: "Zohan"}
+            //query: "Zohan"
+            //result: Array(1)
+            //0: (2) ["Zohan", "0665502911"]
+            //length: 1
+            //__proto__: Array(0)
+            //__proto__: Object
+
+            $('.user-container').html('');
+           $.each(results.result, function (key, value) {
+               var p = document.createElement("p");
+                $('.user-container').append(p);
+                p.style.color = "blue";
+                p.style.border = "solid 1px green";
+                p.style.backgroundColor = "grey";
+                p.append('user: ' + value[0]+ ', ' + 'phone: ' + value[1])
+            });
+        }
+    });
+ });
+
+    $(document).ready(function () {
         $("a").on('click', function (event) {
         event.preventDefault();
 
-            $.get("/ajax/", function (data) {
+            var data = {}; // data ето данные (словарь) которые мы будем отправлять на бекенд
+            var url = "/ajax/"; // url в django функция которго будет отрабатывать когда сработает ajax
+
+            var p = document.getElementsByClassName("query_p");
+            //var div = document.getElementById("div");
+
+            for(var x=0; x<p.length; x++){
+                data[x] = p[x].innerText //element.date("name") - так можно считать с атрибута date- на теге
+                                        // p[x].innerText - так можно считать с тега
+            }
+             console.log(data);
 
 
-                 $("div").html( data ); // вставляем в элемент <div> данные, полученные от сервера
+            $.ajax({
+                url: url,
+                type: 'get',
+                data: data,
+                cache: true,
+                success: function (data) {  // data - словарь который передаем во views.py
+
+
+                var div = document.getElementById("div");
+                $.each(data, function(key, value){
+                    console.log(value);
+                    var p = document.createElement("p");
+                    p.append(value);
+                    div.appendChild(p);
+                });
+
+
+                console.log(data);
+                console.log('ajax ok');
+                },
+                error: function () {
+                    console.log('error');
+                }
             });
 
         });
     });
 
 </script>
+
+
 </body>
+<style>
+    .p_teg{
+        border: solid 1px grey;
+    }
+</style>
 </html>
 
