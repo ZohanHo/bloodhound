@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .forms import FormPopup
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from .models import Contact
+from .seed import *
 
 
 def PopupView(request):

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'Ajax',
+    'django_seed',
 ]
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d %H:%M:%S']
