@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from base import urls
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', include("base.urls")),
-    path('', include("Ajax.urls")),
+    path('rest/', include("REST.urls")),
+    path('ajaxrest/', include("ajaxRest.urls")),
+    path('ajax/', include("Ajax.urls")),
+    path('', include("languages.urls")),
 ]

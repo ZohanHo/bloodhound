@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'Ajax',
+    'ajaxRest',
     'django_seed',
+    'REST',
+    'rest_framework',
+    'languages',
 ]
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d %H:%M:%S']
@@ -53,6 +57,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+        #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        #'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGINATE_BY': 5
+}
+
 
 ROOT_URLCONF = 'bloodhound.urls'
 

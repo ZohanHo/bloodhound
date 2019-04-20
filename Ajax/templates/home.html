@@ -13,6 +13,12 @@
     <button id="button" class="btn btn-warning">Search</button>
 </form>
 
+<div>
+    <button id="btn">Test rest</button>
+</div>
+
+<div id="container"></div>
+
 <a class="" href="" >test</a>
 <br>
 
@@ -21,6 +27,8 @@
         <p class="query_p" data-date="{{ foo.name }}">{{ foo.name }}</p>
     {% endfor %}
 </div>
+
+
 
 <div class="hidden">
     {% for foo in status %}
@@ -82,6 +90,9 @@
     });
  });
 
+
+
+
     $(document).ready(function () {
         $("a").on('click', function (event) {
         event.preventDefault();
@@ -108,6 +119,7 @@
 
 
                 var div = document.getElementById("div");
+
                 $.each(data, function(key, value){
                     console.log(value);
                     var p = document.createElement("p");
@@ -126,6 +138,7 @@
 
         });
     });
+
 
 </script>
 
