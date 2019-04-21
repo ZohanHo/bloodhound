@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'REST',
     'rest_framework',
     'languages',
+    'api',
 ]
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d %H:%M:%S']
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 REST_FRAMEWORK = {

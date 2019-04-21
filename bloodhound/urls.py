@@ -23,5 +23,6 @@ urlpatterns = [
     path('rest/', include("REST.urls")),
     path('ajaxrest/', include("ajaxRest.urls")),
     path('ajax/', include("Ajax.urls")),
-    path('', include("languages.urls")),
+    path('language/', include("languages.urls")),
+    path('api/', include("api.urls")),
 ]

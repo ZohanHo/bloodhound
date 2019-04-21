@@ -9,3 +9,4 @@ router.register(r'languages', views.LanguageView) #ето ендпоинт
 urlpatterns = [
     path('', include(router.urls))
 ]
+
